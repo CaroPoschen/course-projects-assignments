@@ -1,3 +1,3 @@
 # Course Projects and Assignments
 
-My projects and assignments from my master's studies from different courses.
+Some of my projects and assignments from my master's studies from different courses.
