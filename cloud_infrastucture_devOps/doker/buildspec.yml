@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+      python: 3.9
+  pre_build:
+    commands:
+      - pip install -r app/requirements.txt
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - flake8 app/*.py
+  build:
+    commands:
+      - docker build -t $REPOSITORY_URI:latest .
+  post_build:
+    commands:
+      docker push $REPOSITORY_URI:latest
+artifacts:
+  files:
+   - '**/*'
+  name: python-app-$(date +%y%m%d%H%M).zip
